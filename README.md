@@ -1,0 +1,1 @@
+# homework_6_zhanat_darmenov
