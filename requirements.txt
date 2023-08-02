@@ -1,0 +1,15 @@
+
+# Pre-commit hook:
+pre-commit==3.3.3
+
+# Check codestyle:
+flake8==6.0.0
+
+# Formatter. Apply codestyle
+black==23.7.0
+
+# Upgrade syntax:
+pyupgrade==2.31.1
+
+# Remove unused imports & variables:
+autoflake==2.2.0
