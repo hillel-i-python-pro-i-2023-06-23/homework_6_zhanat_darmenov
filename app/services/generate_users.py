@@ -1,6 +1,6 @@
 from typing import NamedTuple
 from collections.abc import Iterator
-
+import re
 from app.services.faker_instance import faker
 
 
@@ -18,7 +18,7 @@ class User(NamedTuple):
         return list(cls._fields)
 
     @classmethod
-    def from_raw_dict(cls, raw_data: dict) -> User:
+    def from_raw_dict(cls, raw_data: dict):
         return cls(
             username=raw_data["username"],
             password=raw_data["password"],
@@ -31,10 +31,14 @@ class User(NamedTuple):
 
 
 def generate_user() -> User:
+    username = faker.user_name()
+    username = re.sub(r"\W+", "_", username.lower())  # Remove non-word characters and convert to lowercase
+    email = f"{username}_example@mail.com"
+
     return User(
-        username=faker.user_name(),
+        username=username,
         password=faker.password(),
-        email=faker.email(),
+        email=email,
         age=faker.pyint(min_value=18, max_value=100),
     )
 
