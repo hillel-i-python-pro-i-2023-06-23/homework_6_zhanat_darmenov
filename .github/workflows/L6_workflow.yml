@@ -26,4 +26,4 @@ jobs:
           black ./
       - name: Check codestyle
         run: |
-          flake8 ./main.py
+          flake8 app/main.py
