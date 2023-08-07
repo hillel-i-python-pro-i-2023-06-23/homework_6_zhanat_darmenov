@@ -1,6 +1,9 @@
-from services import generate_users
-from services import astronauts_manager
-from services import common_ground
+from services import generate_users, astronauts_manager, common_ground
+
+
+def lorem_reader():
+    with open("/wd/files_input/lorem_ipsum.txt") as lr:
+        print(lr.read())
 
 
 def starting_point():
@@ -27,6 +30,7 @@ def csv_decoder():
 
 
 if __name__ == "__main__":
+    lorem_reader()
     starting_point()
     json_decoder()
     csv_decoder()

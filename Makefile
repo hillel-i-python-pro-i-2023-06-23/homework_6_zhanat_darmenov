@@ -3,7 +3,6 @@
 d-homework-i-run:
 	@make d-stop &&\
 	make init-configs &&\
-	make placeholder-file-print &&\
 	make d-run
 
 
@@ -59,5 +58,3 @@ pre-commit-run-all:
 .PHONY: placeholder-file-print
 placeholder-file-print:
 	@cat files_input/lorem_ipsum.txt
-
-
