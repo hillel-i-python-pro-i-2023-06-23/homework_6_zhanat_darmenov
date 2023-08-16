@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/L6_venv" />
       <excludeFolder url="file://$MODULE_DIR$/L6_venv/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/L6HW8venv" />
       <excludeFolder url="file://$MODULE_DIR$/L6HW8venv/lib" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.11" jdkType="Python SDK" />
