@@ -161,6 +161,8 @@ cython_debug/
 
 L6_venv/
 
+L6HW8venv
+
 docker-compose.override.yml
 
 
@@ -169,3 +171,5 @@ docker-compose.override.yml
 
 
 
+!/L6HW8venv/
+!/L6HW8venv/
