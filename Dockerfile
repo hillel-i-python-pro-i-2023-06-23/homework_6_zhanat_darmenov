@@ -12,6 +12,7 @@ RUN useradd --system ${USER} && \
     chown --recursive ${USER} ${WORKDIR}
 
 RUN apt update && apt upgrade -y
+RUN apt install curl
 
 
 COPY --chown=${USER} requirements.txt requirements.txt
@@ -22,8 +23,8 @@ RUN pip install --upgrade pip && \
 
 COPY --chown=${USER} app/main.py main.py
 COPY --chown=${USER} app/services services
+COPY --chown=${USER} app/lorem_ipsum.txt lorem_ipsum.txt
 
 USER ${USER}
 
 ENTRYPOINT ["python", "main.py"]
-
