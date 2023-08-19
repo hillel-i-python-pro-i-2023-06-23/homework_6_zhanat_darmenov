@@ -1,36 +1,62 @@
+import os
 from services import generate_users, astronauts_manager, common_ground
+from flask import Flask
+
+app = Flask(__name__)
 
 
+@app.route("/", methods=["GET", "POST"])
+@app.route("/hello", methods=["GET", "POST"])
+def hello():
+    print(f"Hello")
+    return f"Hello"
+
+
+@app.route("/get-content", methods=["GET", "POST"])
 def lorem_reader():
-    with open("/wd/files_input/lorem_ipsum.txt") as lr:
-        print(lr.read())
+    file_path = os.path.join(os.path.dirname(__file__), "..", "files_input", "lorem_ipsum.txt")
+    with open(file_path) as lr:
+        local_var = lr.read()
+        return f"<pre>{local_var}<pre>"
 
 
-def starting_point():
-    print("Generated Users:\n")
-    user_info = generate_users.generate_users(5)
+@app.route("/generate-users/<int:user_amount>", methods=["GET", "POST"])
+@app.route("/generate-users", methods=["GET", "POST"])
+def starting_point(user_amount: int = 5):
+    generated_content = ["Generated Users:<br>"]
 
+    user_info = generate_users.generate_users(user_amount)
     for i in user_info:
-        print(i)
+        generated_content.append(str(i))
 
-    print("\nUsernames:\n")
+    generated_content.append("<br>Usernames:<br>")
+    user_names = generate_users.generate_users(user_amount)
 
-    user_names = generate_users.generate_users(5)
+    temp = []
 
     for n in user_names:
-        print(n.username)
+        generated_content.append(n.username)
+        temp.append(n.username)  # Append the username to the list
+
+    return "<br>".join(generated_content)
 
 
+@app.route("/space", methods=["GET", "POST"])
 def json_decoder():
-    print(f"\n Amount of json austronauts: {astronauts_manager.read_web_json_file()}")
+    astronaut_count = astronauts_manager.read_web_json_file()
+    print(f"\n Amount of json astronauts: {astronaut_count}")
 
 
+@app.route("/mean", methods=["GET", "POST"])
 def csv_decoder():
     common_ground.read_web_csv_file()
 
 
 if __name__ == "__main__":
-    lorem_reader()
-    starting_point()
-    json_decoder()
-    csv_decoder()
+    app.run(host="0.0.0.0", port="8000", debug=True)
+
+    # starting_point()
+    # lorem_reader()
+    # starting_point()
+    # json_decoder()
+    # csv_decoder()
