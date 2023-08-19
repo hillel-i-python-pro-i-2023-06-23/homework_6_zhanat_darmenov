@@ -1,4 +1,4 @@
-# import os
+import os
 from services import generate_users, astronauts_manager, common_ground
 from flask import Flask
 
@@ -14,8 +14,8 @@ def hello():
 
 @app.route("/get-content/", methods=["GET", "POST"])
 def lorem_reader():
-    file_path = "lorem_ipsum.txt"
-    # file_path = os.path.join(os.path.dirname(__file__), "lorem_ipsum.txt")
+    file_path = os.path.join(os.path.dirname(__file__), "lorem_ipsum.txt")
+
     with open(file_path) as lr:
         local_var = lr.read()
         return f"<pre>{local_var}<pre>"
