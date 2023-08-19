@@ -26,10 +26,7 @@ def read_web_csv_file():
         average_height_cm = round(average_height_cm, 2)
         average_weight_kg = round(average_weight_kg, 2)
 
-        print("\nData:")
-
-        print("\nAverage Height (centimeters):", average_height_cm)
-        print("Average Weight (kilograms):", average_weight_kg)
+        return average_height_cm, average_weight_kg
 
     except Exception as e:
         print("Error:", e)
