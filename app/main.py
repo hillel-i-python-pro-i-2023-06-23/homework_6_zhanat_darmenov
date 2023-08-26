@@ -2,6 +2,9 @@ import os
 from services import generate_users, astronauts_manager, common_ground
 from flask import Flask
 
+# import sqlite3
+# import sqlite_manager
+
 app = Flask(__name__)
 
 
