@@ -78,5 +78,11 @@ def remove_user_info(contact_name, phone_value):
         return "No such User in DB."
 
 
+@app.route("/readall/", methods=["GET", "POST"])
+def read_all():
+    all_user_info = sqlite_manager.get_all_info()
+    return "<br>".join([str(info) for info in all_user_info])
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

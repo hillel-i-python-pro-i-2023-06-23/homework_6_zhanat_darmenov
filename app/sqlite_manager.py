@@ -108,7 +108,7 @@ def del_user_info(contact_name, phone_value):
         connection.commit()
 
     except sqlite3.Error as error:
-        print(f"Error with DB connection: \n{error}\n")
+        print(f"Error Deleting from DB: \n{error}\n")
 
     finally:
         if cursor:  # Use 'cur' instead of 'cursor'
@@ -118,35 +118,28 @@ def del_user_info(contact_name, phone_value):
             connection.close()
 
 
-# def get_all_info(u_nickname, u_password):
-# connection = None
-# cursor = None
-#     try:
-#         conn = sqlite3.connect("db_hw9.db")
-#         cur = conn.cursor()
-#
-#         sql = """
-#             SELECT nickname, password, house, magic_item_level FROM users;
-#         """
-#
-#         # Return all DB lines (List of Tuples):
-#         res = cur.execute(sql)
-#         all_user_info = res.fetchall()
-#         print(f"db_content: {all_user_info}")
-#
-#         for tuple_line in all_user_info:
-#             print(f"Tuple line: {tuple_line}")
-#             if u_nickname and u_password in tuple_line:
-#                 return tuple_line
-#         raise Exception("DB Error")
-#
-#     except sqlite3.Error as error:
-#         print(f"Error with DB connection: \n{error}\n")
-#
-#     finally:
-#         if cursor:
-#             cursor.close()
-#
-#         if connection:
-#             connection.close()
-#
+def get_all_info():
+    connection = None
+    cursor = None
+    try:
+        connection = sqlite3.connect("db_hw9.db")
+        cursor = connection.cursor()
+
+        sql = """
+            SELECT phone_id, contact_name, phone_value FROM phones;
+        """
+
+        res = cursor.execute(sql)
+        all_user_info = res.fetchall()
+        return all_user_info  # Return the fetched data
+
+    except sqlite3.Error as error:
+        print(f"Error with READALL from DB: \n{error}\n")
+        return []
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if connection:
+            connection.close()
