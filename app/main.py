@@ -3,7 +3,7 @@ from services import generate_users, astronauts_manager, common_ground
 from flask import Flask
 
 # import sqlite3
-# import sqlite_manager
+import sqlite_manager
 
 app = Flask(__name__)
 
@@ -12,6 +12,7 @@ app = Flask(__name__)
 @app.route("/hello/", methods=["GET", "POST"])
 def hello():
     print("Hello")
+    sqlite_manager.create_table()
     return "Hello"
 
 
@@ -57,6 +58,15 @@ def csv_decoder():
     av_height, av_weight = common_ground.read_web_csv_file()
 
     return f"Data:<br>Average Height (centimeters): {av_height}<br>" f"Average Weight (kilograms): {av_weight}"
+
+
+@app.route("/<string:contact_name>/<string:phone_value>/", methods=["GET", "POST"])
+def add_user_info(contact_name, phone_value):
+    if sqlite_manager.check_user(contact_name, phone_value):
+        return "Info was already in DB."
+    else:
+        sqlite_manager.put_user_info(contact_name, phone_value)
+        return "Info was added to DB."
 
 
 if __name__ == "__main__":

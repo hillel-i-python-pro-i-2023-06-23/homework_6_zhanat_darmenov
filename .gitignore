@@ -165,12 +165,5 @@ L6HW8venv/
 
 docker-compose.override.yml
 
-
-
-
-
-
-
-!/L6HW8venv/
-!/L6HW8venv/
-/L6HW8venv/
+!/app/db_hw9.db
+app/db_hw9.db

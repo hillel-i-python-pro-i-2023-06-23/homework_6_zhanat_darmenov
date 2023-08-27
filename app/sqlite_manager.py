@@ -32,5 +32,62 @@ def create_table():
             connection.close()
 
 
-# Call the function to create the table
-create_table()
+def check_user(contact_name, phone_value):
+    connection = None
+    cursor = None
+    try:
+        conn = sqlite3.connect("db_hw9.db")
+        cur = conn.cursor()
+
+        sql_check = """
+        SELECT contact_name, phone_value FROM phones;
+        """
+
+        # Return all DB lines (List of Tuples):
+        res = cur.execute(sql_check)
+        db_content = res.fetchall()
+
+        # usr = one Tuple at a Time
+        # usr[0] or "elm in usr" = first cell of every Tuple
+
+        for usr in db_content:
+            print(f"Show next tuple: {usr}")
+            if usr[0] == contact_name and usr[1] == phone_value:
+                return True
+        return False
+
+    except sqlite3.Error as error:
+        print(f"Error checking User: \n{error}\n")
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if connection:
+            connection.close()
+
+
+def put_user_info(contact_name, phone_value):
+    connection = None
+    cursor = None
+    try:
+        connection = sqlite3.connect("db_hw9.db")
+        cursor = connection.cursor()
+
+        sql_put = """
+        INSERT INTO phones (contact_name, phone_value)
+        VALUES(?, ?)
+        """
+
+        cursor.execute(sql_put, (contact_name, phone_value))
+        connection.commit()
+
+    except sqlite3.Error as error:
+        print(f"Error with DB connection: \n{error}\n")
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if connection:
+            connection.close()
