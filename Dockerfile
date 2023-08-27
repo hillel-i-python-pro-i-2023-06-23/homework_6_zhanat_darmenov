@@ -22,6 +22,7 @@ RUN pip install --upgrade pip && \
 
 
 COPY --chown=${USER} app/main.py main.py
+COPY --chown=${USER} app/sqlite_manager.py sqlite_manager.py
 COPY --chown=${USER} app/services services
 COPY --chown=${USER} app/lorem_ipsum.txt lorem_ipsum.txt
 
