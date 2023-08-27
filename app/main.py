@@ -69,5 +69,14 @@ def add_user_info(contact_name, phone_value):
         return "Info was added to DB."
 
 
+@app.route("/rmv/<string:contact_name>/<string:phone_value>/", methods=["GET", "POST"])
+def remove_user_info(contact_name, phone_value):
+    if sqlite_manager.check_user(contact_name, phone_value):
+        sqlite_manager.del_user_info(contact_name, phone_value)
+        return "User was removed from DB."
+    else:
+        return "No such User in DB."
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
